@@ -59,15 +59,22 @@ int main()
 
 		CartesianPoint newPoint = origin + destination;
 
-		std::cout << "origin plus destination = " << newPoint.ToString() << std::endl;
+		std::cout << "origin plus destination = " << newPoint << std::endl;
+
+		CartesianPoint anotherPoint;
+
+		std::cout << "\nEnter another point ";
+		std::cin >> anotherPoint;
+
+		std::cout << "Entered :" << anotherPoint << std::endl;
 
 
 
 		// Output 
 		// Show the points and the distance
 		cout << fixed << setprecision(3); // formatting
-		cout << "\nThe Distance between " << origin.ToString()
-			<< " and " << destination.ToString() << " is "
+		cout << "\nThe Distance between " << origin
+			<< " and " << destination << " is "
 			<< distance << ". " << endl;
 	}
 

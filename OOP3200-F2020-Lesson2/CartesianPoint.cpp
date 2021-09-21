@@ -9,9 +9,9 @@
 // Class definition section
 
 // constructor for CartesianPoint
-CartesianPoint::CartesianPoint(int x, int y)
+CartesianPoint::CartesianPoint(const int x, const int y): m_x(x), m_y(y)
 {
-	SetPoint(x, y);
+	//SetPoint(x, y);
 }
 
 CartesianPoint::~CartesianPoint()
@@ -26,10 +26,10 @@ CartesianPoint::CartesianPoint(const CartesianPoint& point2)
 
 double CartesianPoint::operator-(const CartesianPoint& point_to) const
 {
-	const int xDelta = point_to.myX - myX;
+	const int xDelta = point_to.GetX() - m_x;
 
 	// difference between y values
-	const int yDelta = point_to.myY - myY;
+	const int yDelta = point_to.GetY() - m_y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -50,6 +50,22 @@ CartesianPoint CartesianPoint::operator+(const CartesianPoint& point2) const
 	return tempPoint;
 }
 
+std::ostream& operator<<(std::ostream& out, const CartesianPoint& point)
+{
+	out << point.ToString();
+	return out;
+}
+
+std::istream& operator>>(std::istream& in, CartesianPoint& point)
+{
+	in >> point.m_x;
+	in.ignore();
+	in >> point.m_y;
+
+	return in;
+
+}
+
 void CartesianPoint::SetPoint(int x, int y)
 {
 	SetX(x);
@@ -58,22 +74,22 @@ void CartesianPoint::SetPoint(int x, int y)
 
 void CartesianPoint::SetX(int x)
 {
-	myX = x;
+	m_x = x;
 }
 
 void CartesianPoint::SetY(int y)
 {
-	myY = y;
+	m_y = y;
 }
 
 int CartesianPoint::GetX() const
 {
-	return myX;
+	return m_x;
 }
 
 int CartesianPoint::GetY() const
 {
-	return myY;
+	return m_y;
 }
 
 
@@ -85,10 +101,10 @@ int CartesianPoint::GetY() const
 double CartesianPoint::GetDistanceTo(const CartesianPoint& point_to) const
 {
 	// difference between x values
-	const int xDelta = point_to.myX - myX;
+	const int xDelta = point_to.GetX() - m_x;
 
 	// difference between y values
-	const int yDelta = point_to.myY - myY;
+	const int yDelta = point_to.GetY() - m_y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -105,8 +121,10 @@ std::string CartesianPoint::ToString() const
 	std::stringstream strOut;
 
 	// build the string
-	strOut << "(" << myX << ", " << myY << ")";
+	strOut << "(" << m_x << ", " << m_y << ")";
 
 	// return the string
 	return strOut.str();
 }
+
+
