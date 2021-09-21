@@ -27,6 +27,8 @@ public:
 	// returns a cartesian point
 	CartesianPoint operator+(const CartesianPoint& point2) const;
 
+	CartesianPoint operator=(const CartesianPoint& newPoint);
+
 	// friend overloads
 	friend std::ostream& operator<<(std::ostream& out, const CartesianPoint& point);
 
