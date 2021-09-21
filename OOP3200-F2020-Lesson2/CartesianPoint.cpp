@@ -19,6 +19,11 @@ CartesianPoint::~CartesianPoint()
 	
 }
 
+CartesianPoint::CartesianPoint(const CartesianPoint& point2)
+{
+	SetPoint(point2.GetX(), point2.GetY());
+}
+
 double CartesianPoint::operator-(const CartesianPoint& point_to) const
 {
 	const int xDelta = point_to.myX - myX;
@@ -28,6 +33,21 @@ double CartesianPoint::operator-(const CartesianPoint& point_to) const
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
+}
+
+bool CartesianPoint::operator==(const CartesianPoint& other_point) const
+{
+	return ((GetX() == other_point.GetX()) && (GetY()) == other_point.GetY());
+
+}
+
+CartesianPoint CartesianPoint::operator+(const CartesianPoint& point2) const
+{
+	CartesianPoint tempPoint;
+	tempPoint.SetX(GetX() + point2.GetX());
+	tempPoint.SetY(GetY() + point2.GetY());
+
+	return tempPoint;
 }
 
 void CartesianPoint::SetPoint(int x, int y)
@@ -46,12 +66,12 @@ void CartesianPoint::SetY(int y)
 	myY = y;
 }
 
-int CartesianPoint::GetX() 
+int CartesianPoint::GetX() const
 {
 	return myX;
 }
 
-int CartesianPoint::GetY()
+int CartesianPoint::GetY() const
 {
 	return myY;
 }
